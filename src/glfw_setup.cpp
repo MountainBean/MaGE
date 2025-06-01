@@ -28,6 +28,16 @@ auto createCursorLockedWindow(uint32_t windowWidth,
     return *window;
 }
 
+std::string printHelloTest(bool todo){
+    if (todo){
+        return "Hello to my tests.";
+    }
+    else {
+        return "Absolutely not";
+    }
+
+}
+
 auto createCoreWindow(uint32_t windowWidth,
                       uint32_t windowHeight,
                       const std::string& windowName) -> e<GLFWwindow*> {

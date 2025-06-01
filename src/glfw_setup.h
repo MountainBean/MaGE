@@ -24,6 +24,8 @@ auto createCursorLockedWindow(uint32_t windowWidth,
                       const std::string& windowName,
                       uint16_t msaaBuffers = 1) -> GLFWwindow*;
 
+std::string printHelloTest(bool todo);
+
 auto createCoreWindow(uint32_t windowWidth,
                              uint32_t windowHeight,
                              const std::string& windowName) -> e<GLFWwindow*>;
