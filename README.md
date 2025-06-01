@@ -14,7 +14,15 @@ OpenGL API along the way.
 [glad](https://glad.dav1d.de/)
 
 [GLFW](https://www.glfw.org/)
+
 ...
+
+#### Dependencies (test):
+all above dependancies
+
+[catch/2](https://github.com/catchorg/Catch2)
+
+[cmake](https://cmake.org/)
 
 
 ### Planned Functionality:
