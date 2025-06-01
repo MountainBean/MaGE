@@ -10,7 +10,9 @@ OpenGL API along the way.
 
 #### Dependencies:
 [glm](https://github.com/g-truc/glm)
+
 [glad](https://glad.dav1d.de/)
+
 [GLFW](https://www.glfw.org/)
 ...
 
