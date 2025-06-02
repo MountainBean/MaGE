@@ -18,24 +18,17 @@ auto createCursorLockedWindow(uint32_t windowWidth,
     else {
         switch (window.error()){
         case GLFW_ERROR::WINDOW:
-            std::cout << "Failed to create GLFW window." << std::endl;
+            std::cout << "Failed to create GLFW window.\n";
             break;
         case GLFW_ERROR::GLAD:
-            std::cout << "Failed to initialised GLAD." << std::endl;
+            std::cout << "Failed to initialised GLAD.\n";
+            break;
+        default:
+            std::cout << "Unknown GFLW Error.\n";
             break;
         }
     }
     return *window;
-}
-
-std::string printHelloTest(bool todo){
-    if (todo){
-        return "Hello to my tests.";
-    }
-    else {
-        return "Absolutely not";
-    }
-
 }
 
 auto createCoreWindow(uint32_t windowWidth,
