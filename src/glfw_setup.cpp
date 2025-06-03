@@ -28,6 +28,7 @@ auto createCursorLockedWindow(uint32_t windowWidth,
             break;
         }
     }
+    configure3Denv();
     return *window;
 }
 
@@ -85,6 +86,14 @@ void setMultiSampling(uint16_t buffers){
     if (buffers > 1 && buffers <= 4) {
         glfwWindowHint(GLFW_SAMPLES, buffers);
     }
+}
+
+void configure3Denv() {
+    // CONFIGURE OPENGL
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_FRAMEBUFFER_SRGB);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
 }
 
 }

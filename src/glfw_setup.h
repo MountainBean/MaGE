@@ -36,6 +36,7 @@ void configureViewPort(GLFWwindow* window,
                        uint32_t windowWidth,
                        uint32_t windowHeight,
                        uint16_t msaaBuffers);
+void configure3Denv();
 
 }
 #endif
