@@ -22,6 +22,7 @@ public:
            glm::vec3 initialFocus = glm::vec3(0.0f));
 
     const glm::vec3& getPos() { return m_pos; };
+    const glm::vec3& getFace() { return m_front; };
 
     glm::mat4 getViewMatrix(){
         return glm::lookAt(m_pos, m_pos + m_front, m_up);

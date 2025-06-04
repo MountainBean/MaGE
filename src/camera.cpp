@@ -1,3 +1,4 @@
+#include "glm/geometric.hpp"
 #include <camera.h>
 
 namespace sjd {
@@ -7,7 +8,9 @@ Camera::Camera(glm::vec3 initialPosition,
 :   m_pos {initialPosition}
 {
     _updateCameraVectors();
-    turnTo(initialFocus);
+    if (initialPosition != initialFocus){
+        turnTo(initialFocus);
+    }
 }
 
 void Camera::processMovement(Camera::Movement direction,
@@ -28,6 +31,9 @@ void Camera::processMovement(Camera::Movement direction,
 }
 
 void Camera::turnTo(glm::vec3 point3d) {
+    if (glm::distance(point3d, m_pos) < 0.0001) {
+        return;
+    }
     float offset_x = m_pos.x - point3d.x;
     float offset_y = m_pos.y - point3d.y;
     float offset_z = m_pos.z - point3d.z;
