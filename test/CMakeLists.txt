@@ -6,10 +6,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(Catch2 3 REQUIRED)
 # These tests can use the Catch2-provided main
-add_executable(tests test_glfw_setup.cpp test_camera.cpp)
+add_executable(tests
+    test_glfw_setup.cpp
+    test_camera.cpp
+    test_shader.cpp
+)
 target_sources(tests PRIVATE 
     ../src/glfw_setup.cpp
     ../src/camera.cpp
+    ../src/shader.cpp
     $ENV{HOME}/OpenGL/src/glad.cpp
 )
 target_include_directories(tests PRIVATE 

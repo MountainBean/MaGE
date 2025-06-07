@@ -9,7 +9,7 @@ auto createCursorLockedWindow(uint32_t windowWidth,
     initializeGlfw(OPENGL_MAJOR_VERSION, OPENGL_MINOR_VERSION);
     setMultiSampling(msaaBuffers);
 
-    e<GLFWwindow*> window = createCoreWindow(windowWidth,
+    ErrWindow<GLFWwindow*> window = createCoreWindow(windowWidth,
                                              windowHeight,
                                              windowName);
     if (window.has_value()){
@@ -34,7 +34,7 @@ auto createCursorLockedWindow(uint32_t windowWidth,
 
 auto createCoreWindow(uint32_t windowWidth,
                       uint32_t windowHeight,
-                      const std::string& windowName) -> e<GLFWwindow*> {
+                      const std::string& windowName) -> ErrWindow<GLFWwindow*> {
 
     GLFWwindow* window = glfwCreateWindow(windowWidth, 
                             windowHeight, 

@@ -17,7 +17,7 @@ enum class GLFW_ERROR {
 };
 
 template <typename T>
-using e = std::expected<T, GLFW_ERROR>;
+using ErrWindow = std::expected<T, GLFW_ERROR>;
 
 auto createCursorLockedWindow(uint32_t windowWidth,
                       uint32_t windowHeight,
@@ -27,8 +27,8 @@ auto createCursorLockedWindow(uint32_t windowWidth,
 std::string printHelloTest(bool todo);
 
 auto createCoreWindow(uint32_t windowWidth,
-                             uint32_t windowHeight,
-                             const std::string& windowName) -> e<GLFWwindow*>;
+                      uint32_t windowHeight,
+                      const std::string& windowName) -> ErrWindow<GLFWwindow*>;
 
 void initializeGlfw(uint16_t MajorOpenGLVersion, uint16_t MinorOpenGLVersion);
 void setMultiSampling(uint16_t buffers);
