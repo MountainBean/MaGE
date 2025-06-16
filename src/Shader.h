@@ -71,8 +71,9 @@ protected:
     };
     auto _compileSubShader(ShaderType shaderType,
                             std::string shaderSource) -> ErrShader<GLuint>;
-    bool _compileProgram(GLuint vertShader, GLuint fragShader);
-    bool _compileProgram(GLuint vertShader, GLuint fragShader, GLuint geomShader);
+    bool _linkProgram(GLuint vertShader, GLuint fragShader);
+    bool _linkProgram(GLuint vertShader, GLuint fragShader, GLuint geomShader);
+    bool _reportLinkingErrors(GLuint programId);
 };
 
 }

@@ -25,5 +25,29 @@ TEST_CASE_PERSISTENT_FIXTURE(DefaultWindowFixture,
             CHECK( testShader.isValid() == true );
         }
     }
+    WHEN("I initialise a new shader with an INVALID vert shader"){
+        sjd::Shader testShader{"./test_shader_data/invalid.vert.glsl",
+                               "./test_shader_data/valid.frag.glsl"};
+        THEN("Shader compile status should be failure"){
+            int success {};
+            glGetProgramiv(testShader.id(), GL_LINK_STATUS, &success);
+            INFO( "Error Message: "<< testShader.errMsg() );
+            CHECK( success == GL_FALSE );
+            CHECK( testShader.isValid() == false );
+        }
+
+    }
+    WHEN("I initialise a new shader with an INVALID frag shader"){
+        sjd::Shader testShader{"./test_shader_data/valid.vert.glsl",
+                               "./test_shader_data/invalid.frag.glsl"};
+        THEN("Shader compile status should be failure"){
+            int success {};
+            glGetProgramiv(testShader.id(), GL_LINK_STATUS, &success);
+            INFO( "Error Message: "<< testShader.errMsg() );
+            CHECK( success == GL_FALSE );
+            CHECK( testShader.isValid() == false );
+        }
+
+    }
 }
 

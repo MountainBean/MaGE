@@ -28,7 +28,7 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath)
         return;
     }
 
-    if (!_compileProgram(vertShader.value(), fragShader.value())) {
+    if (!_linkProgram(vertShader.value(), fragShader.value())) {
         std::cout << "Failed to link shader program.\n";
         return;
     }
@@ -75,7 +75,7 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath, c
         return;
     }
 
-    if (!_compileProgram(vertShader.value(),
+    if (!_linkProgram(vertShader.value(),
                         fragShader.value(),
                         geomShader.value())) {
         std::cout << "Failed to link shader program.\n";
@@ -178,45 +178,34 @@ auto Shader::_compileSubShader(ShaderType shaderType,
     return shaderId;
 }
 
-bool Shader::_compileProgram(GLuint vertShader, GLuint fragShader) {
-    int success {};
-    // shader Program
+bool Shader::_linkProgram(GLuint vertShader, GLuint fragShader) {
     m_id = glCreateProgram();
     glAttachShader(m_id, vertShader);
     glAttachShader(m_id, fragShader);
     glLinkProgram(m_id);
 
-    // print linking errors if any
-    glGetProgramiv(m_id, GL_LINK_STATUS, &success);
-    if(!success) {
-        GLint logSize = 0;
-        glGetProgramiv(m_id, GL_INFO_LOG_LENGTH, &logSize);
-	std::vector<GLchar> infoLog(logSize);
-        glGetProgramInfoLog(m_id, logSize, &logSize, infoLog.data());
-        std::string errorString(infoLog.begin(), infoLog.end());
-        m_errMsg = "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" + errorString + "\n";
-        return false;
-    }
-    return true;
+    return _reportLinkingErrors(m_id);
 }
 
-bool Shader::_compileProgram(GLuint vertShader, GLuint fragShader, GLuint geomShader) {
-    int success {};
-    // shader Program
+bool Shader::_linkProgram(GLuint vertShader, GLuint fragShader, GLuint geomShader) {
     m_id = glCreateProgram();
     glAttachShader(m_id, vertShader);
     glAttachShader(m_id, geomShader);
     glAttachShader(m_id, fragShader);
     glLinkProgram(m_id);
 
-    // print linking errors if any
-    glGetProgramiv(m_id, GL_LINK_STATUS, &success);
+    return _reportLinkingErrors(m_id);
+}
+
+bool Shader::_reportLinkingErrors(GLuint programId) {
+    int success {};
+    glGetProgramiv(programId, GL_LINK_STATUS, &success);
     if(!success)
     {
         GLint logSize = 0;
-        glGetProgramiv(m_id, GL_INFO_LOG_LENGTH, &logSize);
-	std::vector<GLchar> infoLog(logSize);
-        glGetProgramInfoLog(m_id, logSize, &logSize, infoLog.data());
+        glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &logSize);
+        std::vector<GLchar> infoLog(logSize);
+        glGetProgramInfoLog(programId, logSize, &logSize, infoLog.data());
         std::string errorString(infoLog.begin(), infoLog.end());
         m_errMsg = "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" + errorString + "\n";
         return false;
